@@ -7,6 +7,7 @@ export default function(state = INITIAL_STATE, action ){
     case FETCH_POKEMON_INFO:
         return state;
     case FETCH_POKEMONS_LOCATION:
+        console.log(action.payload.data);
         return state;
     case FETCH_POKEMONS_LIST:
         return { ...state, list:action.payload };
