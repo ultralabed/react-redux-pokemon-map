@@ -27,8 +27,8 @@ class PokemonSelectBar extends Component {
     onSelectChange(event){
         var pokemonId = event.target.value;
 
-        console.log(pokemonId);
-
+        //console.log(pokemonId);
+        
         this.setState({ id: pokemonId });
         this.props.fetchPokemonsLocation(25.064676, 121.544358, 12, pokemonId);
         this.props.fetchPokemonInfo(pokemonId);

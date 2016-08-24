@@ -9,6 +9,7 @@ Components:
 Actions:
 1. fetchPokemonInfo
 2. fetchPokemonsLocation
+3. fetchPokemonsList
 
 Reducers:
 1. reducer_pokemon

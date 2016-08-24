@@ -20,10 +20,10 @@ export function fetchPokemonInfo(id){
     };
 }
 
-export function fetchPokemonsLocation(latitude,longitude,level,id){
+export function fetchPokemonsLocation(latitude, longitude, level, id){
+
     const url = `${ GET_LOCATION }?latitude=${latitude}&longitude=${longitude}&zoomLevel=${level}&pokemonId=${id}`;
     //console.log(url);
-
     const request = axios.get(url);
 
     return {
