@@ -8,10 +8,24 @@ class PokemonInfo extends Component {
     }
 
     render(){
+        const { pokemonInfo } = this.props;
+
+        if (!pokemonInfo) {
+            return <div>Please Select Pokemon...</div>;
+        }
+
         return(
-            <div>Pokemon Info</div>
+            <div>
+                <h3>Pokemon Info:</h3>
+                <div>Title: {pokemonInfo.title}</div>
+                <div>Id: {pokemonInfo.id}</div>
+            </div>
         );
     }
 }
 
-export default PokemonInfo;
+function mapStateToProps(state){
+    return { pokemonInfo: state.pokemon.info };
+}
+
+export default connect(mapStateToProps)(PokemonInfo);

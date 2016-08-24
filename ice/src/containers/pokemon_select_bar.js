@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPokemonsList, fetchPokemonsLocation } from '../actions/index';
-
+import { fetchPokemonsList, fetchPokemonsLocation, fetchPokemonInfo } from '../actions/index';
 
 class PokemonSelectBar extends Component {
     constructor(props){
@@ -26,16 +25,18 @@ class PokemonSelectBar extends Component {
     }
 
     onSelectChange(event){
-        console.log(event.target.value);
+        var pokemonId = event.target.value;
 
-        this.setState({ id: event.target.value });
-        this.props.fetchPokemonsLocation(25.064676, 121.544358, 12, event.target.value);
-        
+        console.log(pokemonId);
+
+        this.setState({ id: pokemonId });
+        this.props.fetchPokemonsLocation(25.064676, 121.544358, 12, pokemonId);
+        this.props.fetchPokemonInfo(pokemonId);
     }
 
     render(){
         return(
-            <select  onChange={this.onSelectChange}>
+            <select value={this.state.id} onChange={this.onSelectChange}>
                 {this.renderPokemonsList()}
             </select>
         );
@@ -47,8 +48,10 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({ fetchPokemonsList: fetchPokemonsList, fetchPokemonsLocation: fetchPokemonsLocation }, dispatch);
+    return bindActionCreators({ fetchPokemonsList, fetchPokemonsLocation, fetchPokemonInfo }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonSelectBar);
+
+//export default connect(mapStateToProps, { fetchPokemonsList, fetchPokemonsLocation, fetchPokemonInfo })(PokemonSelectBar);
 

@@ -6,8 +6,18 @@ export const FETCH_POKEMONS_LIST = 'FETCH_POKEMONS_LIST';
 
 const GET_LOCATION = 'https://www.pokeradar.io/api/v1/submissions';
 
-export function fetchPokemonInfo(){
+export function fetchPokemonInfo(id){
+    var pokemonsList = [
+        { title: 'all', id: 0 },
+        { title: 'pokemon1', id: 1 },
+        { title: 'pokemon2', id: 2 },
+        { title: 'pokemon3', id: 3 }
+    ];
     
+    return {
+        type: FETCH_POKEMON_INFO,
+        payload: pokemonsList[id]
+    };
 }
 
 export function fetchPokemonsLocation(latitude,longitude,level,id){

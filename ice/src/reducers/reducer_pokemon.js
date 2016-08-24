@@ -5,7 +5,8 @@ const INITIAL_STATE = { list: [], pokemons: [], info: null };
 export default function(state = INITIAL_STATE, action ){
     switch(action.type){  
     case FETCH_POKEMON_INFO:
-        return state;
+    console.log(action.payload);
+        return { ...state, info:action.payload };
     case FETCH_POKEMONS_LOCATION:
         console.log(action.payload.data);
         return state;
