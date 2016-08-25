@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
+import {fetchPokemon} from '../actions/index';
 
 class SearchList extends Component{
     constructor(props){
@@ -14,12 +17,16 @@ class SearchList extends Component{
 
     onFormSubmit(event){
         event.preventDefault();
+        console.log(this.state.term);
         //We need to go and fetch weather data
         //this.props.fetchWeather(this.state.term);
+        this.props.fetchPokemon(this.state.term);
         this.setState({term: ''});
     }
     render(){
+        
         return(
+            
             <form onSubmit={this.onFormSubmit} className="input-group">
                 <input
                     className="form-control"
@@ -35,4 +42,5 @@ class SearchList extends Component{
 
 }
 
-export default SearchList;
+
+export default connect(null,{fetchPokemon})(SearchList);
