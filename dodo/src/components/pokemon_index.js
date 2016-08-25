@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SearchList from './search_list'
+import PokemonInfo from './pokemon_info'
 import GoogleMap from './google_map';
 import {connect} from 'react-redux';
 class PokemonIndex extends Component{
@@ -28,8 +29,13 @@ class PokemonIndex extends Component{
         }
         return(
         <div style={{ height: "100%" }}>
-            <SearchList />
-            <GoogleMap lon={121.544276} lat={25.053965}  markers={marks}/>
+            <div className="col-md-3">
+                <SearchList />
+                <PokemonInfo />
+            </div>
+            <div style={{ height: "100%" }}>
+                <GoogleMap className="col-md-8" lon={121.544276} lat={25.053965}  markers={marks}/>
+            </div>
         </div>
         );    
     }
