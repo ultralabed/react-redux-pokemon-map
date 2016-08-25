@@ -9,7 +9,7 @@ export function fetchSelectPockmon(pokemon){
     const url = `${ROOT_URL}`;
     const requset = axios.get(url);
 
-  console.log('requset:',requset);
+  console.log('action requset:',requset);
 
     return {
         type: FETCH_POCKMON_SELECTED,

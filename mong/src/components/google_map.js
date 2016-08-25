@@ -7,78 +7,73 @@ import { selectPockmon } from '../actions/index';
 
 class PkMap extends Component {
 
+    constructor(props){
+		super(props);
+	}
+
   state = {
-    center: {lat: 24.796288, lng: 120.996908},
-    zoom: 17,
+    center: {lat: 24.7935737496517, lng: 120.994577645321},
+    zoom: 16,
   };
 
-  _onChange = ({center, zoom}) => {
-    this.setState({
-      center: center,
-      zoom: zoom,      
-    });
-  }
+    _onChange = ({center, zoom}) => {
+        this.setState({
+            center: center,
+            zoom: zoom,      
+        });
+    }
 
-markerState = {
-    markers: [{
-      position: {
-        lat: 24.796288,
-        lng: 120.996908,
-      },
-      key: `Taiwan`,
-      defaultAnimation: 2,
-    }],
-  }
- 
-    render(){
-        const pos = {lat: 24.796288, lng: 120.996908}
-        const markerState = {
-            markers: [{
-            position: {
-                lat: 24.795,
-                lng: 120.997,
-            },
-            key: '1',
-            defaultAnimation: 2,
-            icon: {
-                url: "../../style/icon.png",
-                size: {width:10,height:10}
-            },
-            },
-            {
-            position: {
-                lat: 24.7958,
-                lng: 120.997,
-            },
-            key: '2',
-            defaultAnimation: 2,
-            icon: {
-                url: "../../style/icon.png",
-                size:{width:70,height:70}
-            },
-            }
-            ],
+    markerList(data){
+        let markerItem;
+
+        if(data){
+            console.log('list.length',data.length);
+            markerItem = data.map((marker, index) => {
+            
+                const  markerState= {
+                    position: {
+                        lat: marker.latitude,
+                        lng: marker.longitude,
+                    },
+                    key: marker.id,
+                    defaultAnimation: 2,
+                    label: marker.pokemonId.toString(),
+                    icon: {
+                        url: "../../style/icon.png"
+                    }
+                };
+
+                return ( <Marker {...markerState}/> );
+            })
         }
-        console.log(this.props.selectPockmon);
-        console.log(markerState.markers);
+
+        return markerItem;
+    }
+    
+    testList(){
+
+        if(this.props.selectPockmon.list){
+            {this.props.selectPockmon.list.map((marker, index) => {
+                const pos = {lat: marker.latitude, lng: marker.longitude,}
+                console.log('marker',marker);
+                return (
+                    <Marker key={marker.id} position={pos} label= {marker.pokemonId} />
+                );
+            })} 
+        }
+    }
+
+    render(){
+
         return (
             <div>
                 <GoogleMapLoader 
                     containerElement={<div style={{width: '100%',height: '500'}}/>}
                     googleMapElement={
-                        <GoogleMap
-                        onChange={this._onChange}
-                        center={this.state.center}
-                        zoom={this.state.zoom}>
-                        >
+                        <GoogleMap onChange={this._onChange} center={this.state.center} zoom={this.state.zoom}>
                         
-                        {markerState.markers.map((marker, index) => {
-                            return (
-                                <Marker key={marker.key} position={marker.position} label= {marker.key} 
-                                    icon={marker.icon}
-                                />
-                            );
-                        })}  
+                            { this.markerList(this.props.selectPockmon.list) }
+                            
                         </GoogleMap>
 
                     }
@@ -89,7 +84,6 @@ markerState = {
 }
 
 function mapStatToProp(state) {
-    console.log(state);
     return {
 		selectPockmon: state.selectPockmon
 	};
