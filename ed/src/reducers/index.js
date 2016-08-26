@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import PokemonDataReducer from './reducer_pokemon_data';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state
+    pokemonData: PokemonDataReducer
 });
 
 export default rootReducer;
