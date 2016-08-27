@@ -17,11 +17,15 @@ class PokemonMap extends Component {
     });
     return pokeRadarPrediction.map((pokemon, index) => {
         let pos ={lat:pokemon.latitude ,lng:pokemon.longitude};
+        let size={width:20,height:20};
+        let icon='http://image.itmedia.co.jp/nl/articles/1607/20/kutsu_1607020pikachusong01.jpg';
         return (
             <Marker
               key={index} 
               ref={index}
               position={pos}
+              icon={icon}
+              size={size}
           />
         );
     });

@@ -22,6 +22,9 @@ class PokemonList extends Component {
           <option value="1">妙蛙種子</option>
           <option value="2">妙蛙草</option>
           <option value="3">妙蛙花</option>
+          <option value="25">皮卡丘</option>
+          <option value="129">鯉魚王</option>
+          <option value="143">卡比獸</option>
         </select>
       </div>
     )
