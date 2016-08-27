@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
+import * as _ from 'lodash';
 
 class PokemonMap extends Component {
   constructor(props) {
@@ -11,11 +12,13 @@ class PokemonMap extends Component {
     if(!this.props.pokemonData) {
       return null;
     }
-    
-    return this.props.pokemonData.map((pokemon, index) => {
-      let pos ={lat:pokemon.latitude ,lng:pokemon.longitude};
+    let pokeRadarPrediction = _.remove(this.props.pokemonData, function(d) {
+      return d.trainerName == '(Poke Radar Prediction)';
+    });
+    return pokeRadarPrediction.map((pokemon, index) => {
+        let pos ={lat:pokemon.latitude ,lng:pokemon.longitude};
         return (
-           <Marker
+            <Marker
               key={index} 
               ref={index}
               position={pos}
