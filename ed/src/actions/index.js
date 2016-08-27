@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const ROOT_URL = `https://www.pokeradar.io/api/v1/submissions?`;
 export const FETCH_POKEMON_MAP = 'FETCH_POKEMON_MAP';
+export const SET_POKID = 'SET_POKID';
 
 export function fetchPokemonMap(pokId) {
   let lat = 24.990795;
@@ -13,5 +14,12 @@ export function fetchPokemonMap(pokId) {
   return {
     type: FETCH_POKEMON_MAP,
     payload: request
+  };
+}
+
+export function setPokId(pokId) {
+  return {
+    type: SET_POKID,
+    payload: pokId
   };
 }

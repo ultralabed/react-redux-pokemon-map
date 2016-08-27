@@ -45,7 +45,6 @@ class PokemonMap extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log('state',state);
   return { pokemonData: state.pokemonData.pokemonData};
 }
 
