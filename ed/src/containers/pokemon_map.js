@@ -9,7 +9,7 @@ class PokemonMap extends Component {
   constructor(props) {
     super(props);
     let _map;
-    this.handleCenterChanged = this.handleCenterChanged.bind(this);
+    this.handleDragend = this.handleDragend.bind(this);
     this.handleZoomChanged = this.handleZoomChanged.bind(this);
   }
 
@@ -35,7 +35,7 @@ class PokemonMap extends Component {
     });
   }
 
-  handleCenterChanged() {
+  handleDragend() {
     let latLngObj = {
       lat: this._googleMapComponent.getCenter().lat(),
       lng: this._googleMapComponent.getCenter().lng()
@@ -65,7 +65,7 @@ class PokemonMap extends Component {
                       ref={(map) => (this._googleMapComponent = map)}
                       defaultZoom={this.props.mapZoom} 
                       defaultCenter={{ lat: this.props.mapCenter.lat, lng: this.props.mapCenter.lng }}
-                      onCenterChanged={this.handleCenterChanged}
+                      onDragend={this.handleDragend}
                       onZoomChanged={this.handleZoomChanged}
                     >
                         { this.renderMarker() }
