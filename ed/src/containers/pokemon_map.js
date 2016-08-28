@@ -63,8 +63,8 @@ class PokemonMap extends Component {
                 googleMapElement={
                     <GoogleMap
                       ref={(map) => (this._googleMapComponent = map)}
-                      defaultZoom={12} 
-                      defaultCenter={{ lat: 25.064676, lng: 121.544358 }}
+                      defaultZoom={this.props.mapZoom} 
+                      defaultCenter={{ lat: this.props.mapCenter.lat, lng: this.props.mapCenter.lng }}
                       onCenterChanged={this.handleCenterChanged}
                       onZoomChanged={this.handleZoomChanged}
                     >
