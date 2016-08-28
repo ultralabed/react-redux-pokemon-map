@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPokemonMap, setPokId } from '../actions/index'; 
+import { fetchPokemonMap, setPokId, fetchPokemonInfo } from '../actions/index';
 
 class PokemonList extends Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class PokemonList extends Component {
 
   selectedIndex(event) {
     this.props.fetchPokemonMap(event.target.value);
+    this.props.fetchPokemonInfo(event.target.value);
     this.props.setPokId(event.target.value);
   }
 
@@ -32,7 +33,7 @@ class PokemonList extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ fetchPokemonMap, setPokId }, dispatch);
+    return bindActionCreators({ fetchPokemonMap, setPokId, fetchPokemonInfo }, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(PokemonList);

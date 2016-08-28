@@ -6,17 +6,33 @@ class PokemonInfo extends Component {
     super(props);
   }
 
+  renderAbilities() {
+    return this.props.pokemonInfo.abilities.map( (data) => {
+      return <h5 key={data.slot}>Ability: {data.ability.name}</h5>
+    })
+  }
+
   render() {
+    if(this.props.pokemonInfo.length == 0){
+      return <h5>Please select a pokemon.</h5>
+    }
+
     return (
-      <div>
-        Pokemon info
+      <div className="row">
+        <h3 className="col-xs-12">Pokemon info</h3>
+        <div className="col-xs-12">
+          <h4>Name: <image src={`src/images/${this.props.pokemonId}.jpg`}></image>{this.props.pokemonInfo.name}</h4>
+          <h4>Height: {this.props.pokemonInfo.height} feet</h4>
+          <h4>Weight: {this.props.pokemonInfo.weight} pound</h4>
+          {this.renderAbilities()}
+        </div>
       </div>
     )
   }
 }
 
-function mapStateToProps({ pokemonData }) {
-  return { pokemonData };
+function mapStateToProps(state) {
+  return { pokemonId: state.pokemonData.pokemonId, pokemonInfo: state.pokemonData.pokemonInfo };
 }
 
 export default connect(mapStateToProps)(PokemonInfo);
