@@ -23,9 +23,5 @@ export default function(state = INIT_STATE, action) {
     case SET_MAP_ZOOM:
       return { ...state, mapZoom:action.payload };
   }
-  switch ( action.type) {
-    case FETCH_POKEMON_MAP_ON_UPDATE:
-      return { ...state, pokemonData:action.payload.data.data };
-  }
   return state;
 }

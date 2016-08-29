@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchPokemonMap, setPokId, fetchPokemonInfo, fetchPokemonMapOnUpdate } from '../actions/index';
+import { fetchPokemonMap, setPokId, fetchPokemonInfo } from '../actions/index';
 
 class PokemonList extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class PokemonList extends Component {
 
   selectedIndex(event) {
     this.props.fetchPokemonInfo(event.target.value);
-    this.props.fetchPokemonMapOnUpdate(event.target.value, this.props.mapCenter.lat, this.props.mapCenter.lng, this.props.mapZoom)
+    this.props.fetchPokemonMap(event.target.value, this.props.mapCenter.lat, this.props.mapCenter.lng, this.props.mapZoom)
     this.props.setPokId(event.target.value);
   }
 
@@ -33,13 +33,13 @@ class PokemonList extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ fetchPokemonMap, setPokId, fetchPokemonInfo, fetchPokemonMapOnUpdate }, dispatch);
+  return bindActionCreators({ fetchPokemonMap, setPokId, fetchPokemonInfo }, dispatch);
 }
 
 function mapStateToProps(state) {
-    return {
-    mapCenter: state.pokemonData.mapCenter,  
-    mapZoom: state.pokemonData.mapZoom};
+  return {
+  mapCenter: state.pokemonData.mapCenter,
+  mapZoom: state.pokemonData.mapZoom};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonList);

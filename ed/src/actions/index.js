@@ -7,19 +7,6 @@ export const SET_POKID = 'SET_POKID';
 export const FETCH_POKEMON_INFO = 'FETCH_POKEMON_INFO';
 export const SET_MAP_CENTER = 'SET_MAP_CENTER';
 export const SET_MAP_ZOOM = 'SET_MAP_ZOOM';
-export const FETCH_POKEMON_MAP_ON_UPDATE = 'FETCH_POKEMON_MAP_ON_UPDATE';
-
-export function fetchPokemonMap(pokId) {
-  let lat = 24.990795;
-  let lng = 121.499239;
-  let zoom = 12;
-  const url = `${POKERADAR_URL}latitude=${lat}&longitude=${lng}&zoomLevel=${zoom}&pokemonId=${pokId}`;
-  const request = axios.get(url);
-  return {
-    type: FETCH_POKEMON_MAP,
-    payload: request
-  };
-}
 
 export function setPokId(pokId) {
   return {
@@ -51,12 +38,12 @@ export function setMapZoom(zoomLevel) {
   };
 }
 
-export function fetchPokemonMapOnUpdate(pokId, lat, lng, zoom) {
+export function fetchPokemonMap(pokId, lat, lng, zoom) {
   let zoomLevel = zoom - 2;
   const url = `${POKERADAR_URL}latitude=${lat}&longitude=${lng}&zoomLevel=${zoomLevel}&pokemonId=${pokId}`;
   const request = axios.get(url);
   return {
-    type: FETCH_POKEMON_MAP_ON_UPDATE,
+    type: FETCH_POKEMON_MAP,
     payload: request
   };
 }

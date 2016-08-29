@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 import * as _ from 'lodash';
-import { setMapCenter, setMapZoom, fetchPokemonMapOnUpdate } from '../actions/index';
+import { setMapCenter, setMapZoom, fetchPokemonMap } from '../actions/index';
 
 class PokemonMap extends Component {
   constructor(props) {
@@ -21,17 +21,18 @@ class PokemonMap extends Component {
       return d.trainerName == '(Poke Radar Prediction)';
     });
     return pokeRadarPrediction.map((pokemon, index) => {
-        let pos ={lat:pokemon.latitude ,lng:pokemon.longitude};
-        let icon=`src/images/${this.props.pokemonId}.jpg`;
+      let pos ={lat:pokemon.latitude ,lng:pokemon.longitude};
+      let icon=`src/images/${this.props.pokemonId}.jpg`;
 
-        return (
-            <Marker
-              key={index} 
-              ref={index}
-              position={pos}
-              icon={icon}
-          />
-        );
+      return (
+        <Marker
+          key={index}
+          ref={index}
+          position={pos}
+          icon={icon}
+          animation={2}
+        />
+      );
     });
   }
 
@@ -42,7 +43,7 @@ class PokemonMap extends Component {
     }
     this.props.setMapCenter(latLngObj);
     if(this.props.mapCenter && this.props.pokemonId) {
-      this.props.fetchPokemonMapOnUpdate(this.props.pokemonId, latLngObj.lat, latLngObj.lng, this.props.mapZoom);
+      this.props.fetchPokemonMap(this.props.pokemonId, latLngObj.lat, latLngObj.lng, this.props.mapZoom);
     }
   }
 
@@ -50,29 +51,29 @@ class PokemonMap extends Component {
     let zoomLevel = this._googleMapComponent.getZoom();
     this.props.setMapZoom(zoomLevel);
     if(this.props.mapCenter && this.props.pokemonId) {
-      this.props.fetchPokemonMapOnUpdate(this.props.pokemonId, this.props.mapCenter.lat, this.props.mapCenter.lng, zoomLevel);
+      this.props.fetchPokemonMap(this.props.pokemonId, this.props.mapCenter.lat, this.props.mapCenter.lng, zoomLevel);
     }
   }
 
   render() {
     return (
-            <div className="map">
-            Pokemon Map
-            <GoogleMapLoader
-                containerElement={ <div style={{height: '100%', width: '100%'}} /> }
-                googleMapElement={
-                    <GoogleMap
-                      ref={(map) => (this._googleMapComponent = map)}
-                      defaultZoom={this.props.mapZoom} 
-                      defaultCenter={{ lat: this.props.mapCenter.lat, lng: this.props.mapCenter.lng }}
-                      onDragend={this.handleDragend}
-                      onZoomChanged={this.handleZoomChanged}
-                    >
-                        { this.renderMarker() }
-                    </GoogleMap>
-                }
-            />           
-            </div>     
+      <div className="map">
+        Pokemon Map
+        <GoogleMapLoader
+          containerElement={ <div style={{height: '100%', width: '100%'}} /> }
+          googleMapElement={
+            <GoogleMap
+              ref={(map) => (this._googleMapComponent = map)}
+              defaultZoom={this.props.mapZoom}
+              defaultCenter={{ lat: this.props.mapCenter.lat, lng: this.props.mapCenter.lng }}
+              onDragend={this.handleDragend}
+              onZoomChanged={this.handleZoomChanged}
+            >
+                { this.renderMarker() }
+            </GoogleMap>
+          }
+        />
+      </div>
     );
   }
 }
@@ -85,7 +86,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setMapCenter, setMapZoom, fetchPokemonMapOnUpdate }, dispatch);
+  return bindActionCreators({ setMapCenter, setMapZoom, fetchPokemonMap }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonMap);
