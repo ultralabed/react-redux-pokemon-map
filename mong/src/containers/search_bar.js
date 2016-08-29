@@ -6,19 +6,21 @@ import { fetchSelectPockmon } from '../actions/index';
 class SearchBar extends Component {
 	constructor(props){
 		super(props);
-        this.state = { selected: 'all' };
+        
+        this.state = { selected: '0' };
+        this.props.fetchSelectPockmon(this.state.selected);
 	}
 
     change(event) {
-        console.log("selectedId=>"+event.target.value);
-        this.setState({ selected: event.target.value});
-        this.props.fetchSelectPockmon(this.state.selected);
+        this.setState( { selected: event.target.value} );
+        this.props.fetchSelectPockmon(event.target.value);
     }
 
 	render(){
+        console.log("selectedId=>" ,this.state.selected );
 		return (
             <div className="search-bar">
-                <select onChange={this.change.bind(this)} value={this.props.selected}>
+                <select onChange={this.change.bind(this)} value={this.state.selected}>
                     <option value="0">All</option>
                     <option value="3">no.3-妙蛙花</option>
                     <option value="6">no.6-噴火龍</option>

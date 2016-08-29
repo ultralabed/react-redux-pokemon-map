@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import SearchBar from './search_bar';
-import GoogleMap from './google_map';
+import SearchBar from '../containers/search_bar';
+import GoogleMap from '../containers/google_map';
+import PokemonList from '../containers/pokemon_list';
 
 export default class App extends Component {
   render() {
@@ -9,6 +10,7 @@ export default class App extends Component {
       <div>
           <SearchBar />
           <GoogleMap />
+          <PokemonList/>
       </div>
     );
   }
