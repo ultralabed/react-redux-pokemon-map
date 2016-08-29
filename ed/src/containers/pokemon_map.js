@@ -30,7 +30,6 @@ class PokemonMap extends Component {
           ref={index}
           position={pos}
           icon={icon}
-          animation={2}
         />
       );
     });

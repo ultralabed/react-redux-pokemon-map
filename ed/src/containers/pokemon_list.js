@@ -9,6 +9,14 @@ class PokemonList extends Component {
     this.selectedIndex = this.selectedIndex.bind(this);
   }
 
+  componentDidMount() {
+    setInterval( () => {
+      if(this.props.pokemonId && this.props.mapCenter.lat && this.props.mapCenter.lng && this.props.mapZoom) {
+        this.props.fetchPokemonMap(this.props.pokemonId, this.props.mapCenter.lat, this.props.mapCenter.lng, this.props.mapZoom)
+      }
+    }, 15000);
+  }
+
   selectedIndex(event) {
     this.props.fetchPokemonInfo(event.target.value);
     this.props.fetchPokemonMap(event.target.value, this.props.mapCenter.lat, this.props.mapCenter.lng, this.props.mapZoom)
@@ -39,7 +47,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
   return {
   mapCenter: state.pokemonData.mapCenter,
-  mapZoom: state.pokemonData.mapZoom};
+  mapZoom: state.pokemonData.mapZoom,
+  pokemonId: state.pokemonData.pokemonId}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PokemonList);
