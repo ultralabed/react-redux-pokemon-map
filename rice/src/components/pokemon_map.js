@@ -1,18 +1,38 @@
 import React ,{ Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import GoogleMapWithPokemons from './google_map';
 import { fetchPokemon } from '../actions/index';
-import GoogleMap from './google_map';
+
 
 class PokemomMap extends Component{
     componentWillMount(){
-       this.props.fetchPokemon();
+        this.props.fetchPokemon('1');
     }
+    renderPokemonInfo(){
+        if (!this.props.pokemon)
+        {
+            return "Please select one pokemon"
+        }
+		// return this.props.pokemon.pokemon.data.map((pokemon)=>{
+		// 	return (
+        //         <li key={pokemon.id} className="list-group-item">
+        //                 User:{pokemon.trainerName}<br/>
+        //                 in ({pokemon.latitude},{pokemon.longitude})          
+        //         </li>
+		// 	);
+		// });
+        //console.log(this.props.pokemon.pokemon.data)
+	}
     render(){
-        console.log('pokemon.data:',this.props.pokemon);
         return (
             <div className="col-md-12">
-                <GoogleMap />
+                <div>
+                    <ul className="list-group">
+                        {this.renderPokemonInfo()}
+                    </ul>
+                </div>
+                <GoogleMapWithPokemons/>
             </div>       
         );
     }
@@ -22,7 +42,6 @@ function mapStateToProps(state){
     return { pokemon: state.pokemon}; 
 }
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ fetchPokemon }, dispatch);
+	return bindActionCreators({fetchPokemon }, dispatch);
 }
-
 export default connect(mapStateToProps,mapDispatchToProps)(PokemomMap);

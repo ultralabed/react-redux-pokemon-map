@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectPokemon } from '../actions/index';
+import { fetchPokemon } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 class PokemonSelect extends Component{
-
     renderPokemonList(){
 		return this.props.pokemonList.map((pokemon)=>{
 			return (
@@ -16,12 +16,16 @@ class PokemonSelect extends Component{
 			);
 		});
 	}
-
+    onSelectChange(term) {
+		this.setState({term});
+		this.props.selectPokemon(term);
+        this.props.fetchPokemon(term);
+	}
     render(){
         return(
             <div className="form-group col-md-4 pull-right" >
                 <label>Select a Pokemon:</label>
-                <select className="form-control" onChange = {(event)=> this.props.selectPokemon(event.target.value)}>
+                <select className="form-control" onChange = {(event)=> this.onSelectChange(event.target.value)}>
                     {this.renderPokemonList()}
                 </select>
             </div>
@@ -34,7 +38,7 @@ function mapStateToProps(state) {
 	};
 }
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({ selectPokemon: selectPokemon }, dispatch);
+	return bindActionCreators({ selectPokemon,fetchPokemon }, dispatch);
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(PokemonSelect);

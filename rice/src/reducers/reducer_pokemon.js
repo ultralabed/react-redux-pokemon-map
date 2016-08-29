@@ -1,10 +1,9 @@
 import { FETCH_POKEMON } from '../actions/index';
-const INITIAL_STATE = {  pokemon: [] };
 
-export default function (state = INITIAL_STATE , action){
+export default function (state = null, action){
     switch (action.type) {
         case FETCH_POKEMON:
-         return [...state, action.payload.data.data ];
+         return { ...state, pokemon: action.payload.data };
     }
     return state;
 }
