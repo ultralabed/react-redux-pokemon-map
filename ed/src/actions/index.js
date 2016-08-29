@@ -52,7 +52,8 @@ export function setMapZoom(zoomLevel) {
 }
 
 export function fetchPokemonMapOnUpdate(pokId, lat, lng, zoom) {
-  const url = `${POKERADAR_URL}latitude=${lat}&longitude=${lng}&zoomLevel=${zoom}&pokemonId=${pokId}`;
+  let zoomLevel = zoom - 2;
+  const url = `${POKERADAR_URL}latitude=${lat}&longitude=${lng}&zoomLevel=${zoomLevel}&pokemonId=${pokId}`;
   const request = axios.get(url);
   return {
     type: FETCH_POKEMON_MAP_ON_UPDATE,
