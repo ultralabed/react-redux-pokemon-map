@@ -35,7 +35,7 @@ class PokemonMap extends Component {
     });
     return pokeRadarPrediction.map((pokemon, index) => {
       let pos ={lat:pokemon.latitude ,lng:pokemon.longitude};
-      let icon=`src/images/${this.props.pokemonId}.jpg`;
+      let icon=`src/images/${this.props.pokemonId}.png`;
       let pokemonCreateTime = moment(pokemon.created).format("mm:ss");
 
       return (

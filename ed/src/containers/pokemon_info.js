@@ -21,7 +21,7 @@ class PokemonInfo extends Component {
       <div className="row">
         <h3 className="col-xs-12">Pokemon info</h3>
         <div className="col-xs-12">
-          <h4>Name: <image src={`src/images/${this.props.pokemonId}.jpg`}></image>{this.props.pokemonInfo.name}</h4>
+          <h4>Name: <image src={`src/images/${this.props.pokemonId}.png`}></image>{this.props.pokemonInfo.name}</h4>
           <h4>Height: {this.props.pokemonInfo.height} feet</h4>
           <h4>Weight: {this.props.pokemonInfo.weight} pound</h4>
           {this.renderAbilities()}
