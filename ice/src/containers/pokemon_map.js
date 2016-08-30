@@ -11,12 +11,14 @@ class PokemonMap extends Component {
     renderPokemonMarker(pokemon){
         return this.props.pokemons.map((pokemon, index) => {
             const ref = `marker_${index}`;
-           
+            const icon = `/images/pokemon/${pokemon.pokemonId}.png`
+            
             return (
                 <Marker
                     key={index} 
                     ref={ref}
-                    position={{lat:pokemon.latitude ,lng:pokemon.longitude}}
+                    position={{lat:pokemon.latitude, lng:pokemon.longitude}}
+                    icon={{url:icon, scaledSize:{width:30,height:30}}} 
                 />
                 
             );

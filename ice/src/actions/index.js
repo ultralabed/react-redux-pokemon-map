@@ -32,11 +32,8 @@ export function fetchPokemonsLocation(latitude, longitude, level, id){
 
 export function fetchPokemonsList(){
 
-    const url = GET_POKEMONS_LIST;
-    const request = axios.get(url);
-
     return {
         type: FETCH_POKEMONS_LIST,
-        payload: request
+        payload: pokemons
     };
 }

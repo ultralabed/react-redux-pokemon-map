@@ -12,7 +12,7 @@ export default function(state = INITIAL_STATE, action ){
         return { ...state, pokemons:action.payload.data.data };
     case FETCH_POKEMONS_LIST:
         //console.log(action.payload.data);
-        return { ...state, list:action.payload.data };
+        return { ...state, list:action.payload };
 
     default:
         return state;
