@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
+import { GoogleMapLoader, GoogleMap, Marker, OverlayView } from 'react-google-maps';
 import * as _ from 'lodash';
 import { setMapCenter, setMapZoom, fetchPokemonMap } from '../actions/index';
+import moment from 'moment';
+
+const STYLES = {
+  mapContainer: {
+    height: `100%`,
+  },
+  overlayView: {
+    background: `white`,
+    border: `1px solid #ccc`,
+    padding: 1,
+  },
+};
 
 class PokemonMap extends Component {
   constructor(props) {
@@ -11,6 +23,7 @@ class PokemonMap extends Component {
     let _map;
     this.handleDragend = this.handleDragend.bind(this);
     this.handleZoomChanged = this.handleZoomChanged.bind(this);
+    this.getPixelPositionOffset = this.getPixelPositionOffset.bind(this);
   }
 
   renderMarker() {
@@ -23,16 +36,30 @@ class PokemonMap extends Component {
     return pokeRadarPrediction.map((pokemon, index) => {
       let pos ={lat:pokemon.latitude ,lng:pokemon.longitude};
       let icon=`src/images/${this.props.pokemonId}.jpg`;
+      let pokemonCreateTime = moment(pokemon.created).format("mm:ss");
 
       return (
-        <Marker
-          key={index}
-          ref={index}
-          position={pos}
-          icon={icon}
-        />
+          <Marker
+            key={`marker_${index}`}
+            ref={index}
+            position={pos}
+            icon={icon}
+          >
+            <OverlayView 
+              position={pos}
+              key={`timer_${index}`}
+              mapPaneName = {OverlayView.OVERLAY_MOUSE_TARGET}
+              getPixelPositionOffset = {this.getPixelPositionOffset}
+            >
+              <div style={STYLES.overlayView}>{pokemonCreateTime}</div>
+            </OverlayView>
+          </Marker>
       );
     });
+  }
+
+  getPixelPositionOffset(width, height) {
+    return { x: -(width / 2), y: -(height / 2) + 10 };
   }
 
   handleDragend() {
