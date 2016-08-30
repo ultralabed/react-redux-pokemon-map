@@ -17,9 +17,10 @@ class PokemonSelectBar extends Component {
     }
 
     renderPokemonsList(){
-        return this.props.pokemonsList.map((pokemon) => {
+        return Object.keys(this.props.pokemonsList).map((key) => {
+            const pokemon = this.props.pokemonsList[key];
             return (
-                <option value={pokemon.id} key={pokemon.id}>{pokemon.title}</option>
+                <option value={key} key={key}>{pokemon.name}</option>
             );
         });
     }

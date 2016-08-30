@@ -9,7 +9,6 @@ class PokemonInfo extends Component {
 
     render(){
         const { pokemonInfo } = this.props;
-
         if (!pokemonInfo) {
             return <div>Please Select Pokemon...</div>;
         }
@@ -17,8 +16,10 @@ class PokemonInfo extends Component {
         return(
             <div>
                 <h3>Pokemon Info:</h3>
-                <div>Title: {pokemonInfo.title}</div>
-                <div>Id: {pokemonInfo.id}</div>
+                <div>Title: {pokemonInfo.name}</div>
+                <div>Type: {pokemonInfo.type}</div>
+                <div>Attack: {pokemonInfo.attack}</div>
+                <div>Defense: {pokemonInfo.defense}</div>
             </div>
         );
     }

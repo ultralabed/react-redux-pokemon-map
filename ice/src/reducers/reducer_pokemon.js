@@ -8,10 +8,11 @@ export default function(state = INITIAL_STATE, action ){
         //console.log(action.payload);
         return { ...state, info:action.payload };
     case FETCH_POKEMONS_LOCATION:
-        console.log(action.payload.data);
+        //console.log(action.payload.data);
         return { ...state, pokemons:action.payload.data.data };
     case FETCH_POKEMONS_LIST:
-        return { ...state, list:action.payload };
+        //console.log(action.payload.data);
+        return { ...state, list:action.payload.data };
 
     default:
         return state;
