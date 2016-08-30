@@ -5,6 +5,22 @@ import { fetchPokemon } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 class PokemonSelect extends Component{
+    constructor (props){
+		super(props);
+
+		this.state = { 
+			SelectedPokemon: 0,
+		};
+	}
+
+    componentDidMount() {
+        // Every 30s refresh markers  
+        setInterval(function() {       
+           console.log('refresh:',this.state.SelectedPokemon); 
+           this.props.fetchPokemon(this.state.SelectedPokemon);
+        }.bind(this), 30000);          
+    }
+
     renderPokemonList(){
 		return this.props.pokemonList.map((pokemon)=>{
 			return (
@@ -16,12 +32,16 @@ class PokemonSelect extends Component{
 			);
 		});
 	}
-    onSelectChange(term) {
-		this.setState({term});
+
+    onSelectChange(term) {       
 		this.props.selectPokemon(term);
         this.props.fetchPokemon(term);
+        this.setState({
+                SelectedPokemon: term,
+            });
 	}
-    render(){
+
+    render(){      
         return(
             <div className="form-group col-md-4 pull-right" >
                 <label>Select a Pokemon:</label>

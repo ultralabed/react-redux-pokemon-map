@@ -7,12 +7,13 @@ import { fetchPokemon } from '../actions/index';
 
 class PokemomMap extends Component{
     componentWillMount(){
-        this.props.fetchPokemon('1');
+        this.props.fetchPokemon('0');
+
     }
     renderPokemonInfo(){
         if (!this.props.pokemon)
         {
-            return "Please select one pokemon"
+            return ""
         }
 		// return this.props.pokemon.pokemon.data.map((pokemon)=>{
 		// 	return (
